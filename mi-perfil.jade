@@ -1,0 +1,51 @@
+include site/_config.jade
+.profile
+  header
+    .container
+      .col12.tac
+        .profileImage: img(src="site/img/profile.png", alt="")
+        .profileName Nombre del usuario
+        .profileMail correo@electronico.com
+        .profileCel (55)8532-9420
+    .editProfile: i.ion-edit
+  
+  section.historial
+    .container
+      .col12
+        h2 Historial de pedidos
+    .container
+      - for(i=0; i<2; i++)
+        .col4.col-t6.col-m12.pedido
+          .container
+            .col6: .num 39194
+            .col6.tar: .fecha 15-02-2016
+          .detalles(ng-scrollable style="height:80px;")
+            | - Botella x2 <br>
+            | - Vasos x5<br>
+            | - Cubiertos x1<br>
+            | - Cervilletas x1<br>
+            | - Botella x2 <br>
+            | - Vasos x5<br>
+            | - Cubiertos x1<br>
+            | - Cervilletas x1<br>
+          .container
+            .col6: .total $405.00
+            .col6.tar: .estado Por entregar
+      - for(i=0; i<9; i++)
+        .col4.col-t6.col-m12.pedido
+          .container
+            .col6: .num 39194
+            .col6.tar: .fecha 15-02-2016
+          .detalles(ng-scrollable)
+            | - Botella x2 <br>
+            | - Vasos x5<br>
+            | - Cubiertos x1<br>
+            | - Cervilletas x1<br>
+            | - Botella x2 <br>
+            | - Vasos x5<br>
+            | - Cubiertos x1<br>
+            | - Cervilletas x1<br>
+          .container
+            .col6: .total $405.00
+            .col6.tar: .estado.entregado Entregado
+            

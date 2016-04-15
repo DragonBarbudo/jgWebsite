@@ -1,0 +1,698 @@
+//output: docs.html, pretty:false
+
+include site/_config.jade
+
++html5
+  +head(title, stylesheets, keywords, description)
+  link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/dark.min.css")
+  body.docs
+    header(data-scroll-header)
+      .container
+        .col6.col-t12.col-m12: h1 Dragon Webeloper 2
+        .col6.col-t12.col-m12#downloadarea
+          a(href="https://github.com/DragonBarbudo/DragonWebeloper2", target="_blank").btn
+            i.fa.fa-github
+            |  Abrir en Github
+          a(href="https://github.com/DragonBarbudo/DragonWebeloper2/archive/master.zip", target="_blank").btn
+            i.fa.fa-download
+            |  Descarga directa
+          
+    .container#documentacion
+      .col3.col-t12.col-m12
+        - var menuDocs = []
+        - menuDocs.push(['Instalación', 'instalacion'])
+        - menuDocs.push(['Configuración', 'configuracion'])
+        
+        - var submenuDocs = []
+        - submenuDocs.push(['Jade', 'jade'])
+        - submenuDocs.push(['Grid', 'grid'])
+        - submenuDocs.push(['Navegación', 'navegacion'])
+        - submenuDocs.push(['Scroll', 'scroll'])
+        - submenuDocs.push(['Slider', 'slider'])
+        - submenuDocs.push(['ModalBox', 'modalbox'])
+        - submenuDocs.push(['Formularios', 'formularios'])
+        - submenuDocs.push(['Imagen de Fondo', 'imagenDeFondo'])
+        - submenuDocs.push(['Animaciones', 'animaciones'])
+        - menuDocs.push(['Estructura', 'estructura', submenuDocs]) //[2]
+      
+        - var submenuDocsEs = []
+        - submenuDocsEs.push(['Less', 'less'])
+        - submenuDocsEs.push(['Grid', 'gridless'])
+        - submenuDocsEs.push(['Responsive', 'responsive'])
+        - submenuDocsEs.push(['Estados animados', 'estadosAnimados'])
+        - submenuDocsEs.push(['Utilidades', 'utilidades'])
+        - menuDocs.push(['Estilos', 'estilos', submenuDocsEs]) //[2]
+        
+        nav.main: +menu('', menuDocs, 'vertical', '#', ' ', 'btn', {'data-scroll':true})
+        | &nbsp;
+      .col9.col-t12.col-m12#usage
+        .container#instalacion
+          .col12: h2 Instalación
+          .col12
+            .container
+              .col12
+                p Descargar <strong>Dragón Webeloper</strong> de los links superiores.
+                p Una vez descargada cambiar el nombre "DragonWebeloper2" por el nombre del proyecto.
+                p La carpeta deberá ser añadida a un compilador de JADE y LESS (
+                  a(href="https://prepros.io/" target="_blank").btn.small Prepros
+                  | ) y abierta en un editor de código (
+                  a(href="http://brackets.io/", target="_blank").btn.small Brackets
+                  | , 
+                  a(href="https://atom.io/", target="_blank").btn.small Atom
+                  | ).
+                p Si el compilador solicita configuración se deberá desactivar el análisis de JS y activar el archivo <strong>site/css/style.less</strong> como LESS principal para compilar.
+                p Pasar a 
+                  a(href="#configuracion", data-scroll).btn Configuración 
+                  
+        .container#configuracion
+          .col12: h2 Configuración
+          .col12
+            .container
+              .col12
+                p La carpeta <strong>dw</strong> contiene el núcleo de DragonWebeloper y no debe ser alterado a no ser que se necesite alguna configuración no habilitada desde esta documentación.
+                p La carpeta: <strong>site</strong> se encarga de mantener los recursos (multimedia) y archivos como CSS / JS, así como inclusión de librerías y plugins necesarios en específico para el proyecto.
+                h4 Organización en "site".
+                p Dentro de la carpeta <strong>site</strong> los elementos se deberán organizar de la siguiente manera:
+                ul.list
+                  li <strong>css</strong> | Contiene el css principal "style.less" en el cual se trabajará. Este archivo es compilado originando "style.css".
+                  li <strong>js</strong> | Se trabaja sobre "script.js" que al mismo tiempo incluye acciones de plugins pre-instalados para ejecutar acciones comunes de Dragon Webeloper.
+                  li <strong>img</strong> | Aquí se añadirá el total de imagenes a ser utilizada dentro del proyecto.
+                h4 Configurar proyecto
+                p En la carpeta <strong>site</strong> se encuentra el archivo "_config.jade". Dentro se pueden definir datos rápidos de uso general así como el menu principal del sitio.
+                .container
+                  .col6.col-t12.col-m12
+                    | <script src="https://gist.github.com/ealbinu/dc61af0f99e0028af24a.js"></script>
+                  .col6.col-t12.col-m12
+                    h5 - var domain
+                    p Define el ROOT del sitio. En local deberá funcionar como "index.html". Si es cargado a un servidor deberá cambiarse por el dominio de éste: "http://dominio.com".
+                    h5 - var title
+                    p Título del sitio
+                    h5 - var keywords
+                    p Palabras clave del proyecto / sitio
+                    h5 - var description
+                    p Descripción del sitio
+                    h5 STYLESHEETS
+                    P Siguiente la misma estructura se pueden añadir hojas de estilo que se encuentren dentro de la carpeta site (site/css/hoja.css) o externas en un servidor http.
+                    h5 JAVASCRIPTS
+                    p Igual que Stylesheets
+                    h5 MENU
+                    p Siguiendo la misma estructura se pueden añadir o quitar menus generales del proyecto.
+                    p La sintáxis de uso es:
+                    code - menu.push(['NombreDeLaPágina', 'NombreDelArchivo'])
+                    p El nombre de la página se refiere al texto que será mostrado en el sitio.
+                    p El nombre del archivo (slug) es el nombre del archivo que será compilado al html (archivo.jade > archivo.html) y contiene la estructura.
+                p Pasar a 
+                  a(href="#estructura", data-scroll).btn Estructura 
+        .container#estructura
+          .col12: h2 Estructura
+          .col12
+            .container
+              .col12
+                p DragonWebeloper manejar "abreviaciónes" (MIXINS de Jade Y CLASS preeestablecidas) para generar estructuras de acomodo y traer módulos pre-instalados.
+                p A continuación se enlista cada uno de ellos, su uso y sus características de configuración.
+                .theThings
+                  - each sb in submenuDocs
+                    a(href="##{sb[1]}", data-scroll).btn=sb[0]
+        .container#jade
+          .col12: h3 Jade
+          .col12
+            .container
+              .col12
+                p Dragon Webeloper 2 esta basado casi en su totalidad en el lenguaje de 
+                  a(href="http://jade-lang.com/", target="_blank").btn.small Jade
+                  | que es una sintáxis para compilar HTML's y que mezcla características de javascript.
+                p En su versión nativa corre sobre Node.js, sin embargo, puede ser utilizado mediante un "Precompilador" como los antes mencionados (Prepros, Codekit...).
+                p Para conocer más sobre el lenguaje ingresar al sitio
+                  a(href="http://jade-lang.com/", target="_blank").btn.small http://jade-lang.com/
+        .container#grid
+          .col12: h3 Grid
+          .col12
+            .container
+              .col12
+                p El GRID es el sistema que permite realizar un acomodo en base a <strong>12 columnas</strong>. Trabaja mediante clases "col" asignadas a elementos.
+                .container.grid
+                  - for(i=0;i<12;i++)
+                    .col1.t .col1
+                p.small En los ejemplos aquí presentados el fondo de columnas no se verá alineado debido a que se esta montando sobre un espacio más pequeño al real.
+                p El uso de las columnas esta limitado a tener un <strong>.container</strong> superior, es decir:
+                code
+                  | .container
+                  br
+                  | &nbsp;&nbsp;.col1 Contenido
+                p Las columnas cuentan con una variación del 1 al 12, siendo asignadas con el prefijo <strong>col</strong>.
+                code 
+                  | .container
+                  br
+                  | &nbsp;&nbsp;.col2 Contenido
+                  br
+                  | &nbsp;&nbsp;.col2 Contenido
+                  br
+                  | &nbsp;&nbsp;.col3 Contenido
+                  br
+                  | &nbsp;&nbsp;.col4 Contenido
+                p El código anterior se ve reflejado como:
+                .container.grid
+                  .col2.t Contenido
+                  .col2.t Contenido
+                  .col3.t Contenido
+                  .col4.t Contenido
+                p Los <strong>.container</strong> pueden existir dentro de otros <strong>.col*</strong> hasta infinito.
+                code
+                  | .container
+                  br
+                  | &nbsp;&nbsp;.col6
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;.container
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;.col6 6 Columnas
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;.col6 6 Columnas
+                  br
+                  | &nbsp;&nbsp;.col6
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;.container
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.col6 6 Columnas
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.container
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.col4 4col
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.col4 4col
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.col4 4col
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.col6 6 Columnas
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.container
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.col12 12 Cols
+                .container.grid
+                  .col6.t
+                    .container
+                      .col6.t 6 columnas
+                      .col6.t 6 columnas
+                  .col6.t
+                    .container
+                      .col6.t 6 columnas
+                        .container
+                          .col4.t 4col
+                          .col4.t 4col
+                          .col4.t 4col
+                      .col6.t 6 columnas
+                        .container
+                          .col12.t 12 Cols
+                h4 Push
+                p Para acomodar objetos hacia la derecha se puede utilizar el prefijo <strong>push</strong> con la misma sintáxis de los <strong>col</strong>.
+                p El empuje que realiza es basado en los tamaños de columnas. Si se hace un "push1" se estará enviando una columna hacia la derecha.
+                code
+                  | .container
+                  br
+                  | &nbsp;&nbsp; .col4.push2 Push
+                  br
+                  | &nbsp;&nbsp; .col4 Normal
+                .container.grid
+                  .col4.push2.t Push
+                  .col4.t Normal
+                code
+                  | .container
+                  br
+                  | &nbsp;&nbsp; .col2.push2 Push 2
+                  br
+                  | &nbsp;&nbsp; .col2.push1 Push 1
+                  br
+                  | &nbsp;&nbsp; .col2.push1 Push 1
+                .container.grid
+                  .col2.push2.t Push 2
+                  .col2.push1.t Push 1
+                  .col2.push1.t Push 1
+                h4 Responsive grid
+                      
+                p Las columnas inicialmente trabajan con el tamaño máximo a <strong>960px</strong> pero cambian a <strong>480px</strong> cuando la resolución de la ventana es menor a 960px. Cuando la resolución es menor a 480px el .container cambia su ancho al <strong>100%</strong>, por lo que se vuelve un diseño fluído.
+                p.small Estos tamaños se pueden manipular modificando las variables @containerWidth y @containerWidthTablet de site/css/style.less.
+                p Mediante los elementos <strong>-t</strong> y <strong>-m</strong> se pueden establecer diferentes acciones en Col y Push.
+                table
+                  thead
+                    tr
+                      th Dispositivo
+                      th Resolución
+                      th Prefijo
+                      th .container
+                  tbody
+                    tr
+                      td: strong Desktop
+                      td Mayor a <strong>960px</strong>
+                      td .col1 y .push1
+                      td 960px
+                    tr
+                      td: strong Tablet
+                      td Entre <strong>480px y 960px</strong>
+                      td .col-t1 y .push-t1
+                      td 480px
+                    tr
+                      td: strong Móvil
+                      td Menor a <strong>480px</strong>
+                      td .col-m1 y .push-m1
+                      td 100%
+                p.small Para ver los cambios a continuación escale en ancho el navegador
+                code
+                  | .container
+                  br
+                  | &nbsp;&nbsp; .col12.col-t10.col-m8 12 desktop, 10 tablet y 8 móvil
+                .container.grid
+                  .col12.col-t10.col-m8.t 12 desktop, 10 tablet y 8 móvil
+                p Misma estructura anterior pero con uso de push para mantener centrado:
+                code
+                  | .container
+                  br
+                  | &nbsp;&nbsp; .col12.col-t10.col-m8.push-t1.push-m2 12 desktop, 10 tablet y 8 móvil
+                .container.grid
+                  .col12.col-t10.col-m8.push-t1.push-m2.t 12 desktop, 10 tablet (push 1) y 8 móvil (push2)
+                p Acomodo en desktop/tablet y móvil de una estructura tipo header:
+                code
+                  | .container.grid
+                  br
+                  | &nbsp;&nbsp; .col4.push-m4 Logotipo
+                  br
+                  | &nbsp;&nbsp; .col8.col-m12
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp; .container
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .col4 Link 1
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .col4 Link 2
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .col4 Link 3
+                .container.grid
+                  .col4.push-m4.t Logotipo
+                  .col8.col-m12.t
+                    .container
+                      .col4.t Link 1
+                      .col4.t Link 2
+                      .col4.t Link 3
+        .container#navegacion
+          .col12: h3 Navegación
+          .col12
+            .container
+              .col12
+                p El menú principal es generado desde el archivo "_config.jade". Ver 
+                  a(href="#configuracion", data-scroll).btn Configuración
+                  |  para más detalles.
+                p El mixin que genera la creación de un menú de navegación es:
+                code +menu()
+                p El método de uso es el siguiente:
+                code +menu('PaginaActiva', menu, 'TipoDeMenu', 'Prefijo', 'Sufijo', 'ClaseParaLinks', {Atributos})
+                p: strong 'PaginaActiva'
+                p Indica el nombre de la página en la que se encuentr actualmente. Agrega la class "active". Se puede utilizar para resaltar el botón.
+                p: strong menu
+                p Es la variable definida en el archivo "_config.jade". Puede crearse una variable nueva (de tipo array) y crear un menú diferente, teniéndo múltiples menus.
+                p: strong 'TipoDeMenu'
+                p Actualmente existen "horizontal" y "vertical". El menú horizontal distribuye el número de elementos (links) en "cols" del Grid. El menú "vertical" elimina los bullets.
+                .container
+                  .col6.col-t12.col-m12
+                    code +menu('index', menu, 'horizontal')
+                  .col6.col-t12.col-m12
+                    nav.example: +menu('index', menu, 'horizontal', 0, 0, 't')
+                hr
+                .container
+                  .col6.col-t12.col-m12
+                    code +menu('index', menu, 'vertical')
+                  .col6.col-t12.col-m12
+                    nav.example: +menu('index', menu, 'vertical', 0, 0, 't')
+                hr
+                p: strong 'Prefijo' y 'Sufijo'
+                p <strong>Prefijo</strong> Añade texto o símbolos antes del "slug" dentro del link. Útil para añadir # al principio del link. (Usado en navegación por scroll).
+                p <strong>Sufijo</strong> agrega ".html" al final del "slug" si nada es definido. Para colocar texto por 'default' (.html) se puede dejar sin contenido o colocar un 0. Si se quiere un sufijo nulo escribir comillas con espacio " ".
+                .container
+                  .col6.col-t12.col-m12
+                    code +menu('index', menu, 'horizontal', '#', ' ')
+                  .col6.col-t12.col-m12
+                    nav.example: +menu('index', menu, 'horizontal', '#', ' ', 't')
+                    br
+                    br
+                    p.small El link generado para los botón es :   #slug
+                p: strong 'ClaseParaLinks'
+                p Añade un class a cada elemento &lt;a class=""&gt; del menú.
+                .container
+                  .col6.col-t12.col-m12
+                    code +menu('index', menu, 'horizontal', '#', ' ', 'btn small')
+                  .col6.col-t12.col-m12
+                    nav.example: +menu('index', menu, 'horizontal', '#', ' ', 'btn small')
+                    br
+                    p.small Cada link tiene .btn.small
+                p: strong {Atributos}
+                p Permite añadir atributos al elemento &lt;a data=""&gt; del menú utilizando una sintáxis de JSON.
+                p Por ejemplo: <strong>{'data':'valor'}</strong> | <strong>{'data-scroll':true}</strong> | <strong>{'data-sr':'enter right'}</strong>
+                .container
+                  .col6.col-t12.col-m12
+                    code +menu('index', menu, 'horizontal', 0, 0, '', {'data-sr':'enter right'})
+                  .col6.col-t12.col-m12
+                    nav.example: +menu('index', menu, 'horizontal', 0, 0, 't', {'data-sr':'enter top over 1.4s move 50px'})
+                    br
+                    br
+                    p.small Cada link tiene animación mediante el attributo data-sr. Ver módulo "Animaciónes".
+                    
+        .container#scroll
+          .col12: h3 Scroll
+          .col12
+            .container
+              .col12
+                p Se puede añadir una navegación mediante "scroll animado" de una sección a otra. Útil para sitios de 1 sola página.
+                p El scroll se puede aplicar a links (a) utilizando <strong>href="#seccion"</strong> y el atributo <strong>data-scroll</strong>. Dentro de los href se deberá iniciar con <strong>#</strong> seguido del <strong>ID</strong> de la sección destino.
+                code
+                  | a(href="#seccionScroll1", data-scroll)#botonScroll1 Ir a #seccionScroll1
+                  br
+                  br
+                  | .seccionEspaciadora
+                  br
+                  | #seccionScroll1
+                  br
+                a(href="#seccionScroll1", data-scroll)#botonScroll1.btn Ir a #seccionScroll1
+                br
+                .seccionEspaciadora .seccionEspaciadora
+                #seccionScroll1.seccionScroll 
+                  p #seccionScroll1 
+                  br
+                  a(href="#botonScroll1", data-scroll).btn Regresar a #botonScroll1
+              .col12
+                p Para utilizar el menú principal como navegador mediante scroll se debe generar con los siguientes parámetros:
+                code +menu('index', menu, 'horizontal', '#', ' ', '', {'data-scroll':true})
+                nav.example: +menu('index', menu, 'horizontal', '#', ' ', '', {'data-scroll':true})
+        .container#slider
+          .col12
+            h3 Slider | 
+              a(href="http://kenwheeler.github.io/slick/", target="_blank").btn.vbottom
+                | Slick Slider  
+                i.fa.fa-external-link 
+            p.small La configuración del plugin se encuentra en site/js/script.js
+          .col12
+            .container
+              .col12
+                p Permite realizar sliders o banners. El mixin es:
+                code +slider('Tipo', 'imagen', 'imagen', 'imagen'...)
+                p Permite añadir imagenes al infinito.
+                p: strong 'Tipo'
+                p <strong>'one'</strong> Muestra sólo un slide.
+                code +slider('one', 'imagen', 'imagen') 
+                +slider('one', 'http://placehold.it/400x100/ffdd00', 'http://placehold.it/400x100/00ddff')
+                p <strong>'multiple'</strong> Muestra 3 slides. En tablet 2 y en móvil 1.
+                code +slider('multiple', 'imagen', 'imagen', 'imagen', 'imagen', 'imagen', 'imagen') 
+                +slider('multiple', 'http://placehold.it/400x200/ffdd00', 'http://placehold.it/400x200/ddff00', 'http://placehold.it/400x200/00ffdd', 'http://placehold.it/400x200/ffaadd', 'http://placehold.it/400x200/ffaa00', 'http://placehold.it/400x200/aaff00')
+                p <strong>'multiplebox'</strong> Igual que "multiple" pero cada slide es un link que abre la imagen en modalbox.
+                code +slider('multiplebox', 'imagen', 'imagen', 'imagen', 'imagen', 'imagen', 'imagen') 
+                +slider('multiplebox', 'http://placehold.it/400x200/ffdd00', 'http://placehold.it/400x200/ddff00', 'http://placehold.it/400x200/00ffdd', 'http://placehold.it/400x200/ffaadd', 'http://placehold.it/400x200/ffaa00', 'http://placehold.it/400x200/aaff00') 
+                p: strong Configuración manual
+                p El slider puede trabajar con cualquier tipo de contenido mientras que se siga la siguiente sintáxis:
+                code
+                  | .slider.one
+                  br
+                  | &nbsp;&nbsp; div //slide
+                  br
+                  | &nbsp;&nbsp; div //slide
+                  br
+                  | &nbsp;&nbsp; div //slide
+                .slider.one
+                  div.t Contenido del slide
+                  div.t Contenido del slide
+                  div.t Contenido del slide
+                p También se pueden añadir estructuras del GRID
+                code
+                  | .slider.one
+                  br
+                  | &nbsp;&nbsp; div //slide1
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp; .container
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .col4 4 columnas
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .col4 4 columnas
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .col4 4 columnas
+                  br
+                  | &nbsp;&nbsp; div //slide2
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp; .container
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .col4 4 columnas
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .col4 4 columnas
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .col4 4 columnas
+                .slider.one
+                  div(style="background:#dd00ff")
+                    .container
+                      .col4.t 4 columnas
+                      .col4.t 4 columnas
+                      .col4.t 4 columnas
+                  div(style="background:#00ddff")
+                    .container
+                      .col4.t 4 columnas
+                      .col4.t 4 columnas
+                      .col4.t 4 columnas
+        .container#modalbox
+          .col12
+            h3 Modalbox | 
+              a(href="http://brutaldesign.github.io/swipebox/", target="_blank").btn.vbottom
+                | Swipebox  
+                i.fa.fa-external-link             
+            p.small La configuración del plugin se encuentra en site/js/script.js
+          .col12
+            .container
+              .col12
+                p Añade Modalbox (lightbox) a links, pudiendo manejar contenidos de imagen y video (youtube y vimeo).
+                p Añadir class .box a los elementos de link (&lt;a class="box"&gt;)
+            hr
+            .container  
+              .col8
+                code a(href="linkAImagen.jpg").box
+              .col4
+                a(href="http://placehold.it/400x200/ffdd00").box.btn.mt10 Ver imagen
+            hr
+            .container
+              .col8
+                code a(href="linkAImagen.jpg", title="Con título").box
+              .col4
+                a(href="http://placehold.it/400x200/ffdd00", title="Título de la imagen").box.btn.mt10 Ver imagen
+            hr
+            .container  
+              .col6
+                code
+                  | a(href="linkAImagen.jpg").box
+                  br
+                  | &nbsp;&nbsp; img(src="linkImagen.jpg")
+                a(href="http://placehold.it/400x200/ffdd00").box: img(src="http://placehold.it/400x200/ffdd00", alt="").w100
+              .col6
+                code
+                  | a(href="linkAImagen.jpg", title="Con título").box
+                  br
+                  | &nbsp;&nbsp; img(src="linkImagen.jpg")
+                a(href="http://placehold.it/400x200/ffdd00", title="Título de la imagen").box: img(src="http://placehold.it/400x200/ddff00", alt="").w100
+            .container
+              .col6
+                code
+                  | a(href="Link Videmo").box
+                  br
+                  | &nbsp;&nbsp; img(src="linkImagen.jpg")
+                a(href="http://vimeo.com/29193046").box: img(src="https://i.vimeocdn.com/video/236084241_150x84.jpg", alt="").w100
+              .col6
+                code
+                  | a(href="Link YouTube").box
+                  br
+                  | &nbsp;&nbsp; img(src="linkImagen.jpg")
+                a(href="https://www.youtube.com/watch?v=ScMzIvxBSi4").box: img(src="https://i.ytimg.com/vi/ScMzIvxBSi4/mqdefault.jpg", alt="").w100
+        
+        .container#formularios
+          .col12: h3 Formularios
+          .col12
+            .container
+              .col12
+                p Los formularios trabajan con el API de 
+                  a(href="https://mandrillapp.com/", target="_blank").btn.small Mandrill
+                  | en conjunto con un sistema en PHP cargado en 
+                  a(href="https://dragonbarbudo.com/api/email.php", target="_blank").btn.small https://dragonbarbudo.com/api/email.php
+                  | .
+                p El action="" del form se redirige hacia la api de dragonbarbudo.com (link anterior) y se mandan inputs de tipo hidden con información de <strong>receptor(_to)</strong>, <strong>emisor(_from)</strong> y <strong>asunto(_subject)</strong>:
+                code
+                  | form(action="https://dragonbarbudo.com/api/email.php", method="get")
+                  br
+                  | &nbsp;&nbsp; input(type="hidden", name="_to", value="receptor@dominio.com")
+                  br
+                  | &nbsp;&nbsp; input(type="hidden", name="_from", value="emisor@dominio.com")
+                  br
+                  | &nbsp;&nbsp; input(type="hidden", name="_subject", value="Asunto del correo")
+                p Si se utiliza envío mediante ajax no es necesario especificar nada más. Sin embargo este desarrollo debería ser manual.
+                p Si se desea utilizar el método tradicional se deberá especificar la ruta a la que se redireccionará después en un campo <strong>_redirect</strong>
+                code &nbsp;&nbsp; input(type="hidden", name="_redirect", value="http://dominio.com/mensajeEnviado.html")
+                br
+                p: strong MIXIN para crear campos rápidos:
+                code +formInput('Tipo', 'Name', 'Label:', 'Placeholder', Requerido)
+                p
+                  strong 'Tipo'
+                  |  text, textarea, date, number, tel, email...
+                p
+                  strong 'Name'
+                  |  El correo recibido hace referencia a este campo para señalar el contenido.
+                p
+                  strong 'Label'
+                  |  Etiqueta que se muestra antes del input.
+                p
+                  strong 'Placeholder'
+                  |  Texto dentro del campo que desaparece al escribir.
+                p
+                  strong Requerido
+                  | | <strong>false</strong> o <strong>true</strong>. Indica si el campo es necesario.
+                code +formInput('text', 'Empresa', 'Empresa:', '¿Dónde trabajas?', false)
+                +formInput('Tipo', 'Name', 'Label:', 'Placeholder', Requerido)
+                h4 Método express
+                p: strong Simple
+                p Se puede crear un formulario rápido (simple) con los campos tradicionales: nombre, correo, teléfono y mensaje:
+                code +formSimple('receptor@domino.com', 'emisor@dominio.com', 'Asunto del mensaje')
+                +formSimple('-', '-', '-')
+                p: strong Simple extendido
+                p Es posible extender el formulario con campos personalizados. Los nuevos campos aparecerán antes de la caja de mensaje y pueden utilizarse estructura del GRID:
+                code 
+                  | +formSimple('receptor@domino.com', 'emisor@dominio.com', 'Asunto del mensaje')
+                  br
+                  | &nbsp;&nbsp; .container
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp; .col6
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +formInput('date', 'Nacimiento', 'Fecha de nacimiento:', '', true)
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp; .col6
+                  br
+                  | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; +formInput('text', 'Empresa', 'Empresa:', '¿Dónde trabajas?', false)
+                
+                +formSimple('-', '-', '-')
+                  .container
+                    .col6
+                      +formInput('date', 'Nacimiento', 'Fecha de nacimiento:', '', true)
+                    .col6
+                      +formInput('text', 'Empresa', 'Empresa:', '¿Dónde trabajas?', false)
+          
+          
+          
+        .container#imagenDeFondo
+          .col12
+            h3 Imagen de fondo | 
+              a(href="http://srobbin.com/jquery-plugins/backstretch/", target="_blank").btn.vbottom
+                | Backstretch  
+                i.fa.fa-external-link 
+            p.small La configuración del plugin se encuentra en site/js/script.js
+          .col12
+            .container
+              .col12
+                p Este módulo permite asignar 1 o múltiples imagenes (en slide) de fondo a cualquier elemento o al body mismo. Mantiene el tamaño de la imagen de modo que se ajuste al tamaño del contenedor.
+                code +sliderbg('Target', 'Imagen')
+                p: strong 'Target'
+                p Es el elemento al que se le añadirá la imagen de fondo. Puede ser 'body' para agregarlo al fondo del sitio o un elemento específico ya sea por su ID ('#elemento') o CLASS ('.elementos')
+                p: strong 'Imagen'
+                p Al igual que el módulo de +slider, este componente permite añadir imagenes al infinito.
+                p: strong 1 Imagen de fondo:
+                .container
+                  .col6.col-t12.col-m12
+                    code
+                      | +sliderbg('#target', 'rutadeimagen.jpg')
+                      br
+                      | #target1
+                  .col6.col-t12.col-m12
+                    +sliderbg('#target1', 'http://lorempixel.com/400/200')
+                    #target1.somebox
+                p: strong Slider de fondo:
+                p Al añadir más imagenes trabaja como un slider de fondo que va realizando el paso por cada imagen.
+                .container
+                  .col6.col-t12.col-m12
+                    code
+                      | +sliderbg('#target', 'rutadeimagen.jpg', 'rutadeimagen2.jpg')
+                      br
+                      | #target2
+                  .col6.col-t12.col-m12
+                    +sliderbg('#target2', 'http://lorempixel.com/400/200', 'http://lorempixel.com/400/201')
+                    #target2.somebox
+                p Se puede utilizar con cualquier contenedor.
+                +sliderbg('#target3', 'http://lorempixel.com/400/202', 'http://lorempixel.com/400/203')
+                .container.grid#target3
+                  br
+                  br
+                  .col4.t Texto
+                  .col4.t Texto
+                  .col4.t Texto
+                  br
+                  br
+
+                    
+        .container#animaciones
+          .col12
+            h3 Animaciones | 
+              a(href="https://github.com/jlmakes/scrollReveal.js/wiki/Keywords", target="_blank").btn.vbottom
+                | ScrollReveal  
+                i.fa.fa-external-link 
+            p.small La configuración del plugin se encuentra en site/js/script.js
+          .col12
+            .container
+              .col12
+                p Añade animacion de entrada a cualquier elemento al añadir la propiedad "data-sr". La animación ocurre cada vez que el objeto sale y entra de la ventana.
+                code div(data-sr) Animación
+                .container.grid
+                  .col4.push4.t(data-sr) Animación
+                p Se puede configurar de diferentes maneras:
+                .container.grid
+                  .col3.t(data-sr) (data-sr)
+                  .col3.t(data-sr="enter top") (data-sr="enter top")
+                  .col3.t(data-sr="move 50px") (data-sr="move 50px enter left")
+                  .col3.t(data-sr="enter right move 50px") (data-sr="enter right move 50px")
+                  .col3.t(data-sr="wait 0.8s flip 90deg") (data-sr="wait 0.8s flip 90deg")
+                  .col3.t(data-sr="scale up 100% wait 0.5s") (data-sr="scale up 100% wait 0.5s")
+                  .col3.t(data-sr="roll -45deg over 3.0s") (data-sr="roll -45deg over 3.0s")
+                  .col3.t(data-sr="spin 180deg") (data-sr="spin 180deg")
+                
+    
+  
+  
+  
+  
+        .container#estilos
+          .col12: h2 Estilos
+          .col12
+            .container
+              .col12
+                p Dragon Webeloper funciona mediante el sistema de precompilación de CSS llamado 
+                  a(href="http://lesscss.org/", target="_blank").btn.small LESS.
+                p Mediante archivos de LESS se generó el núcleo de los componentes enlistados en el área de ESTRUCTURA. A continuación se revisarán clases y componentes creados desde LESS que no son implementadas por JADE.
+                .theThings
+                  - each sb in submenuDocsEs
+                    a(href="##{sb[1]}", data-scroll).btn=sb[0]
+        .container#less
+          .col12: h2 LESS
+          .col12
+            .container
+              .col12
+                p
+        .container#gridless
+          .col12: h2 Grid
+          .col12
+            .container
+              .col12
+                p
+        .container#responsive
+          .col12: h2 Responsive
+          .col12
+            .container
+              .col12
+                p
+        
+        .container#utilidades
+          .col12: h2 Utilidades
+          .col12
+            .container
+              .col12
+                p
+          
+          
+          
+          
+    script(src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js")
+    +scripts
+    script.
+      $(document).ready(function() { hljs.configure({useBR: true}); $('code').each(function(i, block) { hljs.highlightBlock(block); }); });
+    

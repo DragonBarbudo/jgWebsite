@@ -1,0 +1,96 @@
+include ../dw/dw.jade
+
+- var domain = "index.html"
+
+//- METAS
+- var title = "JagerGin"
+- var keywords = ""
+- var description = ""
+
+//- STYLESHEETS
+- var stylesheets = []
+- stylesheets.push('http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css')
+- stylesheets.push('http://fonts.googleapis.com/css?family=Lato:300,400,700')
+- stylesheets.push('http://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css')
+- stylesheets.push('https://cdnjs.cloudflare.com/ajax/libs/jquery.swipebox/1.4.1/css/swipebox.min.css')
+- stylesheets.push('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css')
+- stylesheets.push('site/css/style.css') //Main style
+
+//- JAVASCRIPTS
+- var javascripts = []
+- javascripts.push('https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js')
+- javascripts.push('https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+- javascripts.push('http://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/jquery.swipebox/1.4.1/js/jquery.swipebox.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.3.2/scrollReveal.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/scrollify/0.1.10/jquery.scrollify.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/7.0.2/js/smooth-scroll.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.0/angular-sanitize.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min.js')
+- javascripts.push('https://maps.googleapis.com/maps/api/js?sensor=false')
+- javascripts.push('site/js/angular-simple-logger.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/angular-google-maps/2.3.2/angular-google-maps.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/locale/es.js')
+- javascripts.push('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js')
+- javascripts.push('site/js/sb-date-select.js')
+- javascripts.push('site/js/ngGeolocation.js')
+- javascripts.push('site/js/ngsticky.js')
+- javascripts.push('site/js/ngscrollable.js')
+- javascripts.push('site/js/script.js') //Main Js
+- javascripts.push('site/js/app.js') 
+- javascripts.push('site/js/services.js') 
+- javascripts.push('site/js/controllers.js') 
+
+//- MENU
+- var menu = [] //- menu.push('PageName', 'Slug')
+- menu.push(['Inicio', 'index']) //[0]
+//- menu.push(['Mi perfil', 'nosotros']) //[1]
+//- menu.push(['Servicios', 'servicios']) //[2]
+//- menu.push(['Contacto', 'contacto']) //[3]
+
+
+mixin topbar
+  div(ng-controller="DownloadAppCtrl")
+    .downloadApp.nodesktop(ng-hide="viewed")
+      .container
+        .col10.push1.tac
+          h2 Descarga nuestra App y disfruta la experiencia móvil.
+          a(href="#", ng-click="viewed=true;").close.ion-ios-close-empty
+        .col4.push1.tac
+          a(href="#"): img(src="site/img/appstore.png", alt="Descargar en App Store").w100
+        .col4.push2.tac
+          a(href="#"): img(src="site/img/googleplay.png", alt="Descargar en Google Play").w100
+  .topbar
+    .container
+      .col3.center.tac
+        h1: img(src="site/img/jagergin_typo.svg", alt="#{title}", title="#{title}")
+      .col9.right.tar
+        a(ui-sref="inicio", ui-sref-active="active")
+          i.icon.ion-android-bar
+          span.nomobile.notablet Haz tu pedido
+        //a.search
+          form
+            label(for="search"): i.ion-android-search
+            input(type="text", placeholder="Buscar", id="search") 
+        div.deployable
+          i.icon.ion-person
+          span.nomobile.notablet Cuenta
+          .accountBtns
+            a(ui-sref="mi-perfil", ui-sref-active="active").accountProfile Perfil
+            a.closeSession(ng-click="alert('Cerrando sesión')") Salir          
+        a(ui-sref="carrito", ui-sref-active="active")
+          i.icon.ion-ios-cart-outline
+          span.nomobile.notablet Carrito 
+    
+        
+mixin footer
+    footer
+      .container
+        .col12.tac
+          a(href="https://www.facebook.com/Jagergin/", target="_blank").ion-social-facebook
+          a(href="https://twitter.com/jagergin", target="_blank").ion-social-twitter
+          a(ui-sref="aviso-de-privacidad") Aviso de privacidad
+          a(ui-sref="terminos-de-servicio") Términos de servicio

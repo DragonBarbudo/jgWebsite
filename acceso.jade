@@ -1,0 +1,13 @@
+include site/_config.jade
+
+.accesoAge
+  .container
+    .col12.tac
+      h1.jagin: img(src="site/img/jagergin.svg", alt="").w100
+  .container.checker
+    .col12
+      p.tac Selecciona tu fecha de nacimiento para poder ingresar:
+    .col12
+      .container
+        .col6.push3: div(sb-date-select, ng-model="born.date")
+      

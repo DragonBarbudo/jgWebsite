@@ -1,0 +1,16 @@
+//output: index.html, pretty:false
+
+include site/_config.jade
+
++html5
+  +head(title, stylesheets, keywords, description)
+  body(ng-app="jagerginApp")
+
+    header
+      +topbar
+      
+    .ui-view
+      
+    
+    +footer
+    +scripts

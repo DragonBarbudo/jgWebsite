@@ -1,0 +1,78 @@
+include site/_config.jade
+
+
+
+.zonaJagergin(ng-hide="zona")
+  .container100
+    .col12
+      h2 Zona de cobertura JagerGin
+      p Podemos entregar tu pedido si tu fiesta esta dentro de la zona marcada.
+      ui-gmap-google-map( center='map.center', zoom='map.zoom', options="options")
+        ui-gmap-polygon(static="true", ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", visible="p.visible", geodesic="p.geodesic", fill="p.fill", fit="false") 
+  .container
+    .col4.push4.col-m10.push-m1.tac
+      button(ng-click="zona=true") Aceptar
+      
+    
+
+
+
+.mainSlider
+  .container.searchBar(sticky)
+    form
+      label(for="searchInput")
+        i.ion-android-search
+      input(type="text", id="searchInput", placeholder="{{searchPlaceholder}}" ng-model="searchBar")
+  +slider('one', 'site/img/promo1.jpg', 'site/img/promo2.jpg') 
+
+//.promos
+  .container
+    .col12
+      .slider.multiple
+        div: a(href="#").paq
+          .img: img(src="http://lorempixel.com/200/200/", alt="").w100
+          p Paquete fiestero
+        div: a(href="#").paq
+          .img: img(src="http://lorempixel.com/201/200/", alt="").w100
+          p Paquete nocturno
+        div: a(href="#").paq
+          .img: img(src="http://lorempixel.com/200/200/", alt="").w100
+          p Paquete fiestero
+        div: a(href="#").paq
+          .img: img(src="http://lorempixel.com/201/200/", alt="").w100
+          p Paquete nocturno
+        div: a(href="#").paq
+          .img: img(src="http://lorempixel.com/200/200/", alt="").w100
+          p Paquete fiestero
+        div: a(href="#").paq
+          .img: img(src="http://lorempixel.com/201/200/", alt="").w100
+          p Paquete nocturno
+        
+
+.container  
+  .col3.col-t5.col-m6.categorias
+    | &nbsp;
+    .categoriasInner(sticky)
+      .tac
+        img(src="site/img/jagergin_imago.svg", alt="#{title}").imago
+      ul
+        li: a(ui-sref="inicio", ng-click="CategoryFn(0, '')") Ver todos
+        li(ng-click="CategoryFn(18, 'Cervezas')") Cervezas
+        li(ng-click="CategoryFn(0, '')") Vinos y Licores
+        li(ng-click="CategoryFn(16, 'Mezcladores')") Mezcladores
+        li(ng-click="CategoryFn(23, 'Extras y botanas')") Extras y botanas
+        li(ng-click="CategoryFn(17, 'Farmacia')") Farmacia
+        li(ng-click="CategoryFn(24, 'Lo que no puede faltar')") Lo que no puede faltar
+  .col9.col-t7.col-m6.productos
+    .container
+      .col12
+        .container
+          //- for(i=0; i<20; i++)
+          .col4.col-t12.col-m12.item(ng-repeat="prod in productsList | filter: searchBar")
+            a(href="#").add
+              i.ion-ios-cart-outline
+            .img: img(ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg", alt="").w100
+            .name {{prod.name}}
+            .container
+              .col7: .desc {{prod.description}}
+              .col5.tar: .price {{prod.new_price | currency}}

@@ -1,0 +1,27 @@
+include site/_config.jade
+.checkout
+  .container
+    .col12: h2 Checkout
+    
+  .container
+    .col6
+      h3 Selecciona la ubicación de tu fiesta
+      ui-gmap-google-map( center='map.center', zoom='map.zoom', options="options")
+        ui-gmap-polygon(static="true", ng-repeat="p in polygons track by p.id", path="p.path", stroke="p.stroke", visible="p.visible", geodesic="p.geodesic", fill="p.fill", fit="false") 
+      //p UBICACION: {{marker.coords.latitude}} | {{marker.coords.longitude}}
+      //p {{order.customer_address = address}}
+      
+    .col6
+      h3 Datos de entrega
+      form
+        input(type="text", placeholder="Dirección" ng-model="order.customer_address")
+        input(type="text", placeholder="Código Postal" ng-model="order.customer_zipcode")
+        input(type="text", placeholder="Referencias del domicilio" ng-model="order.customer_references")
+        input(type="text", placeholder="Notas sobre la dirección" ng-model="order.customer_note")
+  
+  .container
+    .col6.push6
+      p.inst.tac Realizar Pago
+      a(ng-click="pay()").checkoutBtn
+        .pplogo: img(src="site/img/paypal.svg", alt="")
+        

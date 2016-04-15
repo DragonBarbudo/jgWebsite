@@ -1,0 +1,91 @@
+
+
+<div ng-hide="zona" class="zonaJagergin">
+  <div class="container100">
+    <div class="col12">
+      <h2>Zona de cobertura JagerGin</h2>
+      <p>Podemos entregar tu pedido si tu fiesta esta dentro de la zona marcada.</p>
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+        <ui-gmap-polygon static="true" ng-repeat="p in polygons track by p.id" path="p.path" stroke="p.stroke" visible="p.visible" geodesic="p.geodesic" fill="p.fill" fit="false"> </ui-gmap-polygon>
+      </ui-gmap-google-map>
+    </div>
+  </div>
+  <div class="container">
+    <div class="col4 push4 col-m10 push-m1 tac">
+      <button ng-click="zona=true">Aceptar</button>
+    </div>
+  </div>
+</div>
+<div class="mainSlider">
+  <div sticky class="container searchBar">
+    <form>
+      <label for="searchInput"><i class="ion-android-search"></i></label>
+      <input type="text" id="searchInput" placeholder="{{searchPlaceholder}}" ng-model="searchBar">
+    </form>
+  </div>
+  <div class="slider one">
+    <div><img src="site/img/promo1.jpg" class="w100"></div>
+    <div><img src="site/img/promo2.jpg" class="w100"></div>
+  </div>
+</div>
+<!--.promos
+.container
+  .col12
+    .slider.multiple
+      div: a(href="#").paq
+        .img: img(src="http://lorempixel.com/200/200/", alt="").w100
+        p Paquete fiestero
+      div: a(href="#").paq
+        .img: img(src="http://lorempixel.com/201/200/", alt="").w100
+        p Paquete nocturno
+      div: a(href="#").paq
+        .img: img(src="http://lorempixel.com/200/200/", alt="").w100
+        p Paquete fiestero
+      div: a(href="#").paq
+        .img: img(src="http://lorempixel.com/201/200/", alt="").w100
+        p Paquete nocturno
+      div: a(href="#").paq
+        .img: img(src="http://lorempixel.com/200/200/", alt="").w100
+        p Paquete fiestero
+      div: a(href="#").paq
+        .img: img(src="http://lorempixel.com/201/200/", alt="").w100
+        p Paquete nocturno
+      
+
+-->
+<div class="container"> 
+  <div class="col3 col-t5 col-m6 categorias">&nbsp;
+    <div sticky class="categoriasInner">
+      <div class="tac"><img src="site/img/jagergin_imago.svg" alt="JagerGin" class="imago"></div>
+      <ul>
+        <li><a ui-sref="inicio" ng-click="CategoryFn(0, '')">Ver todos</a></li>
+        <li ng-click="CategoryFn(18, 'Cervezas')">Cervezas</li>
+        <li ng-click="CategoryFn(0, '')">Vinos y Licores</li>
+        <li ng-click="CategoryFn(16, 'Mezcladores')">Mezcladores</li>
+        <li ng-click="CategoryFn(23, 'Extras y botanas')">Extras y botanas</li>
+        <li ng-click="CategoryFn(17, 'Farmacia')">Farmacia</li>
+        <li ng-click="CategoryFn(24, 'Lo que no puede faltar')">Lo que no puede faltar</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col9 col-t7 col-m6 productos">
+    <div class="container">
+      <div class="col12">
+        <div class="container">
+          <div ng-repeat="prod in productsList | filter: searchBar" class="col4 col-t12 col-m12 item"><a href="#" class="add"><i class="ion-ios-cart-outline"></i></a>
+            <div class="img"><img ng-src="http://dbo.space/jagergin/cms/api/imageFiles/{{prod.refId}}.jpg" alt="" class="w100"></div>
+            <div class="name">{{prod.name}}</div>
+            <div class="container">
+              <div class="col7">
+                <div class="desc">{{prod.description}}</div>
+              </div>
+              <div class="col5 tar">
+                <div class="price">{{prod.new_price | currency}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

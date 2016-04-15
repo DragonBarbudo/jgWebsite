@@ -1,0 +1,24 @@
+include site/_config.jade
+.carrito
+  .container
+    .col12: h2 Carrito
+    
+  .container.listaCarrito
+    -for(i=0; i<6; i++)
+      .itemCarrito
+        .col6: .name Botella de X Producto
+        .col2: .priceIndividual $100.00
+        .col1: .qty: input(type="number", value="3", min="1", max="10")
+        .col2: .priceTotal $300.00
+        .col1: .delete: i.ion-trash-b
+  .container
+    .col5.push7
+      .container.totalCarrito
+        .col5.push1: strong Total: 
+        .col5.push1: .totalAmount $2'600.00
+      .container
+        .col6.push6
+          a(ui-sref="checkout").checkoutBtn
+            i.ion-chevron-right
+            span Pagar
+        

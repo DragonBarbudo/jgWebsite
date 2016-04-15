@@ -1,0 +1,82 @@
+
+<!--output: index.html, pretty:false-->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>JagerGin</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="http://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.swipebox/1.4.1/css/swipebox.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css">
+    <link rel="stylesheet" href="site/css/style.css">
+  </head>
+  <body ng-app="jagerginApp">
+    <header>
+      <div ng-controller="DownloadAppCtrl">
+        <div ng-hide="viewed" class="downloadApp nodesktop">
+          <div class="container">
+            <div class="col10 push1 tac">
+              <h2>Descarga nuestra App y disfruta la experiencia móvil.</h2><a href="#" ng-click="viewed=true;" class="close ion-ios-close-empty"></a>
+            </div>
+            <div class="col4 push1 tac"><a href="#"><img src="site/img/appstore.png" alt="Descargar en App Store" class="w100"></a></div>
+            <div class="col4 push2 tac"><a href="#"><img src="site/img/googleplay.png" alt="Descargar en Google Play" class="w100"></a></div>
+          </div>
+        </div>
+      </div>
+      <div class="topbar">
+        <div class="container">
+          <div class="col3 center tac">
+            <h1><img src="site/img/jagergin_typo.svg" alt="JagerGin" title="JagerGin"></h1>
+          </div>
+          <div class="col9 right tar"><a ui-sref="inicio" ui-sref-active="active"><i class="icon ion-android-bar"></i><span class="nomobile notablet">Haz tu pedido</span></a>
+            <!--a.search
+            form
+              label(for="search"): i.ion-android-search
+              input(type="text", placeholder="Buscar", id="search") 
+            -->
+            <div class="deployable"><i class="icon ion-person"></i><span class="nomobile notablet">Cuenta</span>
+              <div class="accountBtns"><a ui-sref="mi-perfil" ui-sref-active="active" class="accountProfile">Perfil</a><a ng-click="alert('Cerrando sesión')" class="closeSession">Salir          </a></div>
+            </div><a ui-sref="carrito" ui-sref-active="active"><i class="icon ion-ios-cart-outline"></i><span class="nomobile notablet">Carrito </span></a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="ui-view"></div>
+    <footer>
+      <div class="container">
+        <div class="col12 tac"><a href="https://www.facebook.com/Jagergin/" target="_blank" class="ion-social-facebook"></a><a href="https://twitter.com/jagergin" target="_blank" class="ion-social-twitter"></a><a ui-sref="aviso-de-privacidad">Aviso de privacidad</a><a ui-sref="terminos-de-servicio">Términos de servicio</a></div>
+      </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.swipebox/1.4.1/js/jquery.swipebox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/2.3.2/scrollReveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollify/0.1.10/jquery.scrollify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/7.0.2/js/smooth-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.5.0/angular-sanitize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="site/js/angular-simple-logger.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-maps/2.3.2/angular-google-maps.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/locale/es.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
+    <script src="site/js/sb-date-select.js"></script>
+    <script src="site/js/ngGeolocation.js"></script>
+    <script src="site/js/ngsticky.js"></script>
+    <script src="site/js/ngscrollable.js"></script>
+    <script src="site/js/script.js"></script>
+    <script src="site/js/app.js"></script>
+    <script src="site/js/services.js"></script>
+    <script src="site/js/controllers.js"></script>
+  </body>
+</html>
